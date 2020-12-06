@@ -15,13 +15,17 @@ public class RegistrationController {
     private RegistrationService regService;
 
     @GetMapping("/registeruser")
-    public User registerUser(@RequestBody User user){
+    public User registerUser(@RequestBody User user) throws Exception {
 
         String tempNIC = user.getNic();
 
         if (tempNIC != null && !"".equals(tempNIC)){
 
+            User userObj = regService.fetchUserByNIC(tempNIC);
 
+            if (userObj != null){
+                throw new Exception("User With "+tempNIC+" is already exists");
+            }
 
         }
 
