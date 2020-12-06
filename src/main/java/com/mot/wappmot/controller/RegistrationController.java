@@ -32,4 +32,27 @@ public class RegistrationController {
 
     }
 
+    @PostMapping("/login")
+    public User loginUser(@RequestBody User user) throws Exception {
+
+        String tempNIC = user.getNic();
+        String tempPassword = user.getPassword();
+        User userObj = null;
+
+        if (tempNIC != null && tempPassword != null){
+
+            userObj = regService.fetchUserByNICAndPassword(tempNIC, tempPassword);
+
+        }
+
+        if (userObj == null){
+
+            throw new Exception("User Doesn't exists");
+
+        }
+
+        return userObj;
+
+    }
+
 }

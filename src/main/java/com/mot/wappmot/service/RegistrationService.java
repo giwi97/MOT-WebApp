@@ -24,4 +24,10 @@ public class RegistrationService {
 
     }
 
+    public User fetchUserByNICAndPassword(String nic, String password){
+
+        return regRepo.findByNicAndPassword(nic, password);
+
+    }
+
 }
