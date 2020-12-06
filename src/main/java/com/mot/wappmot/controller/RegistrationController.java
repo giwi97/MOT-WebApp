@@ -47,7 +47,7 @@ public class RegistrationController {
 
         if (userObj == null){
 
-            throw new Exception("User Doesn't exists");
+            throw new Exception("Bad Credentials");
 
         }
 
