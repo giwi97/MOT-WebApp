@@ -20,7 +20,7 @@ public class RegistrationService {
 
     public User fetchUserByNIC(String nic){
 
-        return regRepo.findByNICId(nic);
+        return regRepo.findBynic(nic);
 
     }
 

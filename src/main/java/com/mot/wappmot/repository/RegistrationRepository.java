@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface RegistrationRepository extends JpaRepository<User, Integer> {
 
 
-    public User findByNICId(String nic);
+    public User findBynic(String nic);
 }
