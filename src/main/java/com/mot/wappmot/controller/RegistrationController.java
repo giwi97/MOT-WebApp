@@ -12,6 +12,7 @@ public class RegistrationController {
     private RegistrationService regService;
 
     @PostMapping("/registeruser")
+    @CrossOrigin("http://localhost:4200")
     public User registerUser(@RequestBody User user) throws Exception {
 
         String tempNIC = user.getNic();
@@ -33,6 +34,7 @@ public class RegistrationController {
     }
 
     @PostMapping("/login")
+    @CrossOrigin("http://localhost:4200")
     public User loginUser(@RequestBody User user) throws Exception {
 
         String tempNIC = user.getNic();
