@@ -34,4 +34,24 @@ public class ProductsService {
         return productsRepository.findByCategory(category);
 
     }
+
+    public String deleteProductsByID(int id){
+
+        String result;
+
+        try {
+
+            productsRepository.deleteById(id);
+            result = "Product successfully deleted";
+
+        } catch (Exception e){
+
+            result = "Error occured";
+
+        }
+
+        return result;
+
+    }
+
 }
