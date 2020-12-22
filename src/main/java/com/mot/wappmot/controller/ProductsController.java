@@ -30,6 +30,17 @@ public class ProductsController {
     public List<Products> getAllPrices(){
 
         List<Products> products = new ArrayList<Products>();
+        products = productsService.getAllProducts();
+        return products;
+
+    }
+
+    @GetMapping("/searchCategory/{category}")
+    @CrossOrigin("http://localhost:4200")
+    public List<Products> getAllPricesByCategory(@PathVariable String category){
+
+        List<Products> products = new ArrayList<Products>();
+        products = productsService.getAllProductsByCategory(category);
         return products;
 
     }

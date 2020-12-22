@@ -18,14 +18,20 @@ public class ProductsService {
         return productsRepository.save(products);
 
     }
-    public Products fetchProductsByItem(String item){
-
-        return productsRepository.findByitem(item);
-
-    }
+//    public Products fetchProductsByItem(String item){
+//
+//        return productsRepository.findByitem(item);
+//
+//    }
     public List<Products> getAllProducts() {
 
         return productsRepository.findAll();
+
+    }
+
+    public List<Products> getAllProductsByCategory(String category) {
+
+        return productsRepository.findByCategory(category);
 
     }
 }
