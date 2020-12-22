@@ -45,7 +45,7 @@ public class ProductsController {
 
     }
 
-    @GetMapping("/deletePrice/{id}")
+    @DeleteMapping("/deletePrice/{id}")
     @CrossOrigin("http://localhost:4200")
     public String deletePricesByID(@PathVariable int id) {
 
