@@ -10,18 +10,21 @@ import java.sql.Time;
 @Entity
 public class Products {
 
+    private long millis = System.currentTimeMillis();
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    private Date date = new Date(millis);
+    private Time time = new Time(millis);
     private String category;
     private String item;
-    private double minPrice;
-    private double maxPrice;
+    private int minPrice;
+    private int maxPrice;
 
     public Products() {
     }
 
-    public Products(int id, String category, String item, double minPrice, double maxPrice) {
+    public Products(int id, String category, String item, int minPrice, int maxPrice) {
 
         this.id = id;
         this.category = category;
@@ -54,19 +57,19 @@ public class Products {
         this.item = item;
     }
 
-    public double getMinPrice() {
+    public int getMinPrice() {
         return minPrice;
     }
 
-    public void setMinPrice(double minPrice) {
+    public void setMinPrice(int minPrice) {
         this.minPrice = minPrice;
     }
 
-    public double getMaxPrice() {
+    public int getMaxPrice() {
         return maxPrice;
     }
 
-    public void setMaxPrice(double maxPrice) {
+    public void setMaxPrice(int maxPrice) {
         this.maxPrice = maxPrice;
     }
 }
