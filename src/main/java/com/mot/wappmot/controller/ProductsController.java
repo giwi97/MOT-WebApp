@@ -1,9 +1,14 @@
 package com.mot.wappmot.controller;
 
+import com.mot.wappmot.helper.ExcelHelper;
 import com.mot.wappmot.model.Products;
+import com.mot.wappmot.payload.ResponseMessage;
 import com.mot.wappmot.service.ProductsService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +27,37 @@ public class ProductsController {
         prodObj = productsService.savePrices(products);
 
         return prodObj;
+
+    }
+
+    @PostMapping("/upload")
+    @CrossOrigin("http://localhost:4200")
+    public ResponseEntity<ResponseMessage> uploadFile(@RequestParam("file")MultipartFile file){
+
+        String message = "";
+
+        if (ExcelHelper.hasExcelFormat(file)){
+
+            try {
+
+                productsService.saveExcel(file);
+
+                message = "File uploadd successfully:" +file.getOriginalFilename();
+
+                return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessage(message));
+
+            }catch (Exception e){
+
+                message = "File not uploaded "+file.getOriginalFilename();
+                return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(new ResponseMessage(message));
+
+            }
+
+        }
+
+        message = "Please upload an excel file";
+
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResponseMessage(message));
 
     }
 
