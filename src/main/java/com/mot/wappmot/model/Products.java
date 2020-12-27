@@ -37,6 +37,22 @@ public class Products {
         return id;
     }
 
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public Time getTime() {
+        return time;
+    }
+
+    public void setTime(Time time) {
+        this.time = time;
+    }
+
     public void setId(int id) {
         this.id = id;
     }
@@ -71,5 +87,10 @@ public class Products {
 
     public void setMaxPrice(int maxPrice) {
         this.maxPrice = maxPrice;
+    }
+
+    @Override
+    public String toString(){
+        return "ID: "+id+", Date: "+date+", Time: "+time+", Category: "+category+", Item: "+item+", MinPrice: "+minPrice+", MaxPrice: "+maxPrice+"";
     }
 }
