@@ -11,6 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
@@ -18,7 +19,9 @@ public class ExcelHelper {
 
     public static String TYPE = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
     static String[] HEADERs = { "එළවළු", "මිල පරාසය", "අලවර්ග", "මිල පරාසය", "පලාවර්ග", "ධාන්\u200Dයය", "පළතුරු" };
+    static List<String> list = Arrays.asList(HEADERs);
     static String SHEET = "Products";
+    static int check = 0;
 
 
     public static boolean hasExcelFormat(MultipartFile file) {
@@ -36,23 +39,18 @@ public class ExcelHelper {
 
             Workbook workbook = new XSSFWorkbook(inputStream);
 
-            Sheet sheet = workbook.getSheet(SHEET);
+            Sheet sheet = workbook.getSheetAt(0);
             Iterator<Row> rows = sheet.iterator();
 
             List<Products> products = new ArrayList<Products>();
 
-            int rowNumber = 0;
 
             while (rows.hasNext()){
 
                 Row currentRow = rows.next();
 
-                if (rowNumber == 0) {
 
-                    rowNumber++;
-                    continue;
-
-                }
+//                System.out.println("Last cell is "+currentRow.getZeroHeight());
 
                 Iterator<Cell> cellsInRow = currentRow.iterator();
 
@@ -64,30 +62,42 @@ public class ExcelHelper {
 
                     Cell currentCell = cellsInRow.next();
 
-                    switch (cellIdx){
+//                    System.out.println(currentCell.getCellType());
+//                    System.out.println(currentCell);
 
-                        case 0:
-                            products1.setItem(currentCell.getStringCellValue());
-                            break;
+                    if (!currentCell.getCellType().equals("STRING") && !list.contains(currentCell.toString())) {
+                        if (currentCell != null){
 
-                        case 1:
-                            products1.setMinPrice((int) currentCell.getNumericCellValue());
-                            break;
+                            switch (cellIdx) {
 
-                        case 2:
-                            products1.setMaxPrice((int) currentCell.getNumericCellValue());
-                            break;
+                                case 0:
+                                    products1.setItem(currentCell.getStringCellValue());
+                                    System.out.println("String val"+currentCell.getStringCellValue());
+                                    break;
 
-                        default:
-                            break;
+                                case 1:
+                                    products1.setMinPrice((int) currentCell.getNumericCellValue());
+                                    System.out.println(currentCell.getNumericCellValue());
+                                    break;
+
+                                case 2:
+                                    products1.setMaxPrice((int) currentCell.getNumericCellValue());
+                                    System.out.println(currentCell.getNumericCellValue());
+                                    break;
+
+                                default:
+                                    break;
+
+                            }
+
+                        cellIdx++;
 
                     }
-
-                    cellIdx++;
-
+                    }
                 }
 
-                products.add(products1);
+
+                    products.add(products1);
 
             }
 
