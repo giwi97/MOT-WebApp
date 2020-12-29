@@ -18,10 +18,13 @@ import java.util.List;
 public class ExcelHelper {
 
     public static String TYPE = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
-    static String[] HEADERs = { "එළවළු", "මිල පරාසය", "අලවර්ග", "මිල පරාසය", "පලාවර්ග", "ධාන්\u200Dයය", "පළතුරු" };
+    static String[] HEADERs = { "එළවළු", "අලවර්ග", "මිල පරාසය", "පලාවර්ග", "ධාන්\u200Dයය", "පළතුරු" };
+    static String[] categories = { "එළවළු", "අලවර්ග", "පලාවර්ග", "ධාන්\u200Dයය", "පළතුරු" };
     static List<String> list = Arrays.asList(HEADERs);
+    static List<String> chklist = Arrays.asList(categories);
     static String SHEET = "Products";
-    static int check = 0;
+    static String categoryCheck = "";
+    static int columnCheck = 0;
 
 
     public static boolean hasExcelFormat(MultipartFile file) {
@@ -66,11 +69,16 @@ public class ExcelHelper {
 
 //                    System.out.println(currentCell.getCellType());
 
+                    if (chklist.contains(currentCell.toString())){
 
+                        categoryCheck = currentCell.toString();
+                        columnCheck = currentCell.getColumnIndex();
+
+                    }
 
                     if (!currentCell.getCellType().equals("STRING") && !list.contains(currentCell.toString())) {
-                        if (currentCell != null){
-                            System.out.println("Current cell "+currentCell+ "Cell add "+currentCell.getAddress()+"Idx "+cellIdx);
+                        if (currentCell != null || currentCell.toString() != ""){
+
                             switch (cellIdx) {
 
                                 case 0:
@@ -87,7 +95,6 @@ public class ExcelHelper {
 
                                 case 3:
                                     products2.setItem(currentCell.getStringCellValue());
-                                    System.out.println(products2.getItem());
                                     break;
 
                                 case 4:
@@ -103,17 +110,29 @@ public class ExcelHelper {
 
                             }
 
+
+                            if (cellIdx == 1 && cellIdx <= 2){
+
+                                products1.setCategory("එළවළු");
+
+                            }else if (cellIdx == columnCheck && cellIdx > 2){
+
+                                products2.setCategory(categoryCheck);
+
+                            }
+
                         cellIdx++;
 
                         }
                     }
+
                 }
 
                 if(products1.getItem() != "") {
                     products.add(products1);
                     System.out.println("Added records" +products1);
                 }
-                System.out.println("JJJJJJJJJJJJJ"+products2);
+
                 if(products2.getItem() != "" && products2.getItem() != null) {
                     products.add(products2);
                     System.out.println("Added record "+products2+"and"+products2.getItem());
