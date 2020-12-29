@@ -42,7 +42,7 @@ public class ProductsController {
 
                 productsService.saveExcel(file);
 
-                message = "File uploadd successfully:" +file.getOriginalFilename();
+                message = "File uploaded successfully:" +file.getOriginalFilename();
 
                 return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessage(message));
 
