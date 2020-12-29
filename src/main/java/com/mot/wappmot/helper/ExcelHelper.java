@@ -43,6 +43,7 @@ public class ExcelHelper {
             Iterator<Row> rows = sheet.iterator();
 
             List<Products> products = new ArrayList<Products>();
+            List<Products> products3 = new ArrayList<Products>();
 
 
             while (rows.hasNext()){
@@ -55,6 +56,7 @@ public class ExcelHelper {
                 Iterator<Cell> cellsInRow = currentRow.iterator();
 
                 Products products1 = new Products();
+                Products products2 = new Products();
 
                 int cellIdx = 0;
 
@@ -63,26 +65,37 @@ public class ExcelHelper {
                     Cell currentCell = cellsInRow.next();
 
 //                    System.out.println(currentCell.getCellType());
-//                    System.out.println(currentCell);
+
+
 
                     if (!currentCell.getCellType().equals("STRING") && !list.contains(currentCell.toString())) {
                         if (currentCell != null){
-
+                            System.out.println("Current cell "+currentCell+ "Cell add "+currentCell.getAddress()+"Idx "+cellIdx);
                             switch (cellIdx) {
 
                                 case 0:
                                     products1.setItem(currentCell.getStringCellValue());
-                                    System.out.println("String val"+currentCell.getStringCellValue());
                                     break;
 
                                 case 1:
                                     products1.setMinPrice((int) currentCell.getNumericCellValue());
-                                    System.out.println(currentCell.getNumericCellValue());
                                     break;
 
                                 case 2:
                                     products1.setMaxPrice((int) currentCell.getNumericCellValue());
-                                    System.out.println(currentCell.getNumericCellValue());
+                                    break;
+
+                                case 3:
+                                    products2.setItem(currentCell.getStringCellValue());
+                                    System.out.println(products2.getItem());
+                                    break;
+
+                                case 4:
+                                    products2.setMinPrice((int) currentCell.getNumericCellValue());
+                                    break;
+
+                                case 5:
+                                    products2.setMaxPrice((int) currentCell.getNumericCellValue());
                                     break;
 
                                 default:
@@ -92,12 +105,19 @@ public class ExcelHelper {
 
                         cellIdx++;
 
-                    }
+                        }
                     }
                 }
 
-
+                if(products1.getItem() != "") {
                     products.add(products1);
+                    System.out.println("Added records" +products1);
+                }
+                System.out.println("JJJJJJJJJJJJJ"+products2);
+                if(products2.getItem() != "" && products2.getItem() != null) {
+                    products.add(products2);
+                    System.out.println("Added record "+products2+"and"+products2.getItem());
+                }
 
             }
 
