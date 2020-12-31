@@ -9,4 +9,5 @@ public interface RegistrationRepository extends JpaRepository<User, Integer> {
     public User findBynic(String nic);
 
     public User findByNicAndPassword(String nic, String password);
+
 }
