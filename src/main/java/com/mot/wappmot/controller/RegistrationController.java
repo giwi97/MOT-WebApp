@@ -33,6 +33,24 @@ public class RegistrationController {
 
     }
 
+    @PutMapping("/updateuser")
+    @CrossOrigin("http://localhost:4200")
+    public void updateUser(@RequestBody User user){
+
+        regService.updateUser(2, user);
+
+    }
+
+    @GetMapping("/getuser")
+    @CrossOrigin("http://localhost:4200")
+    public User getUser(){
+
+        User user = new User();
+        user = regService.fetchUserByID(2).get();
+        return user;
+
+    }
+
     @PostMapping("/login")
     @CrossOrigin("http://localhost:4200")
     public User loginUser(@RequestBody User user) throws Exception {
