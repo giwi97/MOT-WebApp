@@ -33,6 +33,7 @@ public class RegistrationController {
 
     }
 
+//Updating user
     @PutMapping("/updateuser")
     @CrossOrigin("http://localhost:4200")
     public void updateUser(@RequestBody User user){
