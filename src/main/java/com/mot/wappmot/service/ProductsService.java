@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.sql.Date;
 import java.util.List;
 
 @Service
@@ -57,6 +58,12 @@ public class ProductsService {
 
     public List<String> getAllCategories() {
         return productsRepository.findDistinctByCategory();
+    }
+
+    public Double getAveragePrice(Date date, String category) {
+
+        return productsRepository.findAveragePrice(date, category);
+
     }
 
     public String deleteProductsByID(int id){

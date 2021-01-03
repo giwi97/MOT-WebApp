@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -94,6 +95,14 @@ public class ProductsController {
     public String deletePricesByID(@PathVariable int id) {
 
         return productsService.deleteProductsByID(id);
+
+    }
+
+    @GetMapping("/getavg/{date}/{category}")
+    @CrossOrigin("http://localhost:4200")
+    public Double findAveragePrice(@PathVariable Date date, @PathVariable String category) {
+
+        return productsService.getAveragePrice(date, category);
 
     }
 
