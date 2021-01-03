@@ -55,6 +55,10 @@ public class ProductsService {
 
     }
 
+    public List<String> getAllCategories() {
+        return productsRepository.findDistinctByCategory();
+    }
+
     public String deleteProductsByID(int id){
 
         String result;

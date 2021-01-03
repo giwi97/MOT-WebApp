@@ -80,6 +80,14 @@ public class ProductsController {
         return products;
 
     }
+    @GetMapping("/getCategories")
+    @CrossOrigin("http://localhost:4200")
+    public List<String> getAllCategories() {
+        List<String> categories = new ArrayList<>();
+        categories = productsService.getAllCategories();
+        return categories;
+
+    }
 
     @DeleteMapping("/deletePrice/{id}")
     @CrossOrigin("http://localhost:4200")
