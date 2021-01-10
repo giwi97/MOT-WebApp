@@ -46,7 +46,7 @@ public class ProductsService {
 
     public List<Products> getAllProducts() {
 
-        return productsRepository.findAll();
+        return productsRepository.findAllByDesc();
 
     }
 

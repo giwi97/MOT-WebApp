@@ -16,4 +16,6 @@ public interface ProductsRepository extends JpaRepository<Products, Integer> {
     @Query("SELECT AVG((maxPrice+minPrice)/2) FROM Products WHERE (date = ?1) AND category = ?2")
     Double findAveragePrice(Date date, String category);
 
+    @Query(value = "SELECT * FROM Products p order by p.id DESC", nativeQuery = true)
+    List<Products> findAllByDesc();
 }
