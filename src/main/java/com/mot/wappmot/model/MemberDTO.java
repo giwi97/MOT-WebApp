@@ -1,19 +1,8 @@
 package com.mot.wappmot.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+public class MemberDTO {
 
-import javax.persistence.*;
-
-@Entity
-public class Member {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
-    @Column
     private String username;
-    @Column
-    @JsonIgnore
     private String password;
 
     public String getUsername() {
