@@ -28,6 +28,7 @@ public class JwtAuthenticationController {
 	private JwtUserDetailsService userDetailsService;
 
 	@RequestMapping(value = "/authenticate", method = RequestMethod.POST)
+	@CrossOrigin("http://localhost:4200")
 	public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtRequest authenticationRequest) throws Exception {
 
 		authenticate(authenticationRequest.getUsername(), authenticationRequest.getPassword());
@@ -41,6 +42,7 @@ public class JwtAuthenticationController {
 	}
 	
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
+	@CrossOrigin("http://localhost:4200")
 	public ResponseEntity<?> saveUser(@RequestBody UserDTO user) throws Exception {
 		return ResponseEntity.ok(userDetailsService.save(user));
 	}
